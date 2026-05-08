@@ -88,7 +88,12 @@
 
 (set-default 'truncate-lines t)
 
-(load-theme 'modus-operandi)
+(use-package catppuccin-theme
+  :ensure t
+  :config
+  (load-theme 'catppuccin :no-confirm)
+  (setq catppuccin-flavor 'macchiato) ;; or 'latte, 'macchiato, or 'mocha
+  (catppuccin-reload))
 
 ;; This sets $MANPATH, $PATH and exec-path from your shell,
 ;; but only when executed in a GUI frame on OS X and Linux.
@@ -188,15 +193,6 @@
   (setq doom-modeline-project-name t)
   (display-battery-mode)
   (display-time-mode)
-
-
-  (doom-modeline-def-segment free-disk-segment
-    "A segment that will show the free diskspace"
-    (get-free-disk-space "/"))
-
-  (doom-modeline-remove-segment 'free-disk-segment)
-  (doom-modeline-add-segment 'free-disk-segment 'battery :before)
-
   :init
   (doom-modeline-mode 1)
   )
@@ -652,15 +648,8 @@
   "circleci.el"
   user-emacs-directory))
 
-(use-package symon
-  :ensure t
-  :config
-(setq symon-delay 10)
-  (symon-mode))
+;; ERC
 
-(load-file
- (expand-file-name
-  "xdg-launcher.el"
-  user-emacs-directory))
+(setq erc-hide-list '("QUIT" "PART" "JOIN"))
 
 ;;; emacs.el ends here
