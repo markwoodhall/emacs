@@ -649,7 +649,23 @@
   user-emacs-directory))
 
 ;; ERC
+(use-package erc
+  :config
+  (setq erc-hide-list '("QUIT" "PART" "JOIN"))
+  :custom
+  ;; Protect me from accidentally sending excess lines.
+  (erc-inhibit-multiline-input t)
+  (erc-send-whitespace-lines t)
+  (erc-ask-about-multiline-input t)
+  ;; Scroll all windows to prompt when submitting input.
+  (erc-scrolltobottom-all t)
 
-(setq erc-hide-list '("QUIT" "PART" "JOIN"))
+  ;; Reconnect automatically using a fancy strategy.
+  (erc-server-reconnect-function #'erc-server-delayed-check-reconnect)
+  (erc-server-reconnect-timeout 30))
+
+(use-package erc-join
+  ;; Join #emacs and #erc whenever I connect to Libera.Chat.
+  :custom (erc-autojoin-channels-alist '((Libera.Chat "#emacs" "#erc" "#emacs-til" "#fennel"))))
 
 ;;; emacs.el ends here
