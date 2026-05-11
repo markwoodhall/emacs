@@ -188,14 +188,9 @@
   :ensure t
   :functions doom-modeline-mode
   :config
-  (setq doom-modeline-battery t)
-  (setq doom-modeline-time t)
   (setq doom-modeline-project-name t)
-  (display-battery-mode)
-  (display-time-mode)
   :init
-  (doom-modeline-mode 1)
-  )
+  (doom-modeline-mode 1))
 
 (setq switch-to-buffer-obey-display-actions t)
 
