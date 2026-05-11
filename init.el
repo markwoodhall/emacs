@@ -13,7 +13,10 @@
      "6755a9491a6287586f3c2e57e0fc7411afab62e10a1401fc88147ec06317eafe"
      "4594d6b9753691142f02e67b8eb0fda7d12f6cc9f1299a49b819312d6addad1d"
      default))
- '(package-selected-packages nil)
+ '(package-selected-packages '(claude-code-ide))
+ '(package-vc-selected-packages
+   '((claude-code-ide :url
+                      "https://github.com/manzaltu/claude-code-ide.el")))
  '(safe-local-variable-values
    '((cider-shadow-default-options . "app")
      (cider-default-cljs-repl . shadow))))

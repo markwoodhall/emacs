@@ -663,4 +663,13 @@
   ;; Join #emacs and #erc whenever I connect to Libera.Chat.
   :custom (erc-autojoin-channels-alist '((Libera.Chat "#emacs" "#erc" "#emacs-til" "#fennel"))))
 
+;; AI tooling
+(use-package claude-code-ide
+  :vc (:url "https://github.com/manzaltu/claude-code-ide.el" :rev :newest)
+  :bind ("C-c C-'" . claude-code-ide-menu)
+  :ensure t
+  :config
+  (setq claude-code-ide-prevent-reflow-glitch nil)
+  (claude-code-ide-emacs-tools-setup))
+
 ;;; emacs.el ends here
