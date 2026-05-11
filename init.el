@@ -13,19 +13,7 @@
      "6755a9491a6287586f3c2e57e0fc7411afab62e10a1401fc88147ec06317eafe"
      "4594d6b9753691142f02e67b8eb0fda7d12f6cc9f1299a49b819312d6addad1d"
      default))
- '(package-selected-packages
-   '(all-the-icons catppuccin-theme cider company diff-hl disk-usage
-                   docker dockerfile-mode doom-modeline embark-consult
-                   erc-join evil-cleverparens evil-collection
-                   evil-goggles evil-surround exec-path-from-shell
-                   fennel-mode general highlight-indent-guides magit
-                   marginalia markdown-mode nerd-icons-dired orderless
-                   org-bullets projectile rainbow-delimiters sudo-edit
-                   symon terraform-mode undo-tree vertico vterm
-                   ws-butler yaml-mode yasnippet))
- '(package-vc-selected-packages
-   '((xdg-launcher :vc-backend Git :url
-                   "https://github.com/emacs-exwm/xdg-launcher")))
+ '(package-selected-packages nil)
  '(safe-local-variable-values
    '((cider-shadow-default-options . "app")
      (cider-default-cljs-repl . shadow))))
