@@ -55,7 +55,7 @@ READ-ENV will product a command prefixed with environment variables."
     (read-file-name "Compose File: " (projectile-project-root) "docker-compose.yml" t "docker-compose.yml")))
   (let* ((file (expand-file-name file))
          (command (completing-read "Option: " '("up" "down" file)))
-         (buffer-name (concat "docker compose " command))
+         (buffer-name (concat (projectile-project-root) "  docker compose " command))
          (buffer (make-comint buffer-name "docker" nil "compose" "-f" file command)))
     (mw/comint-pop buffer)))
 
@@ -64,7 +64,7 @@ READ-ENV will product a command prefixed with environment variables."
   (interactive
    (list
     (completing-read "Container: " (mw/bash "docker ps --format '{{json .}}' | jq -r .Names"))))
-  (let ((buffer-name (concat "docker logs " container)))
+  (let ((buffer-name (concat (projectile-project-root) "  docker logs " container)))
     (mw/comint-pop (make-comint buffer-name "docker" nil "logs" container "--follow"))))
 
 ;; docker
