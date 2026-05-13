@@ -672,4 +672,13 @@
   (setq claude-code-ide-prevent-reflow-glitch nil)
   (claude-code-ide-emacs-tools-setup))
 
+(use-package elfeed
+  :ensure t
+  :config
+  (setq elfeed-feeds
+        '(("https://news.ycombinator.com/rss" tech)
+          ("http://nullprogram.com/feed/" blog emacs)
+          ("https://planet.emacslife.com/atom.xml" emacs)
+          ("https://neovim.io/news.xml" neovim))))
+
 ;;; emacs.el ends here
