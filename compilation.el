@@ -114,3 +114,13 @@ READ-ENV will product a command prefixed with environment variables."
          (buffer-name (concat "tail " file))
          (buffer (make-comint buffer-name "tail" nil "-f" file)))
     (mw/comint-pop buffer)))
+
+(defun mw/tail-json (file)
+  "Run tail -f on FILE."
+  (interactive
+   (list
+    (read-file-name "File: ")))
+  (let* ((file (expand-file-name file))
+         (buffer-name (concat "tail " file))
+         (buffer (make-comint buffer-name "sh" nil "-c" (concat "tail -f " file " | jq --unbuffered ."))))
+    (mw/comint-pop buffer)))
