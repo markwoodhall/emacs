@@ -227,7 +227,7 @@
 
 (delete-selection-mode t)
 
-(nvmap :keymaps '(emacs-lisp-mode-map org-mode-map) :prefix "SPC"
+(nvmap :keymaps '(emacs-lisp-mode-map) :prefix "SPC"
   "m"   '(:which-key "major")
   "m e" '(:which-key "evaluation")
   "m e b" '(eval-buffer :which-key "Eval buffer")
@@ -475,7 +475,7 @@
   :ensure t
   :mode ("\\.org\\'" . org-mode))
 
-(add-hook 'org-mode-hook 'org-indent-mode)
+;;(add-hook 'org-mode-hook 'org-indent-mode)
 
 (use-package org-bullets
   :ensure t
@@ -680,5 +680,10 @@
           ("http://nullprogram.com/feed/" blog emacs)
           ("https://planet.emacslife.com/atom.xml" emacs)
           ("https://neovim.io/news.xml" neovim))))
+
+(load-file
+ (expand-file-name
+  "chatgpt.el"
+  user-emacs-directory))
 
 ;;; emacs.el ends here
