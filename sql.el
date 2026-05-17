@@ -12,28 +12,8 @@
                    (sql-port 5433)
                    (sql-server "localhost"))))
 
-(defun mw/psql-connect (product connection)
-  (setq sql-product 'postgres)
-  (sql-connect connection))
-
-(defun mw/psql-local ()
-  (interactive)
-  (mw/psql-connect 'postgres 'local))
-
-(defun mw/psql-local-5431 ()
-  (interactive)
-  (mw/psql-connect 'postgres 'local-5431))
-
-(defun mw/psql-local-5432 ()
-  (interactive)
-  (mw/psql-connect 'postgres 'local-5432))
-
-(defun mw/psql-local-5433 ()
-  (interactive)
-  (mw/psql-connect 'postgres 'local-5433))
-
 (setq sql-ms-program "sqlcmd")
-(setq sql-ms-options '())
+(setq sql-ms-options '("-w" "400" "-y" "10" "-Y" "10" "-k"))
 
 (with-eval-after-load 'company
   (require 'company-keywords)
