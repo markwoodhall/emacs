@@ -213,16 +213,16 @@
   :ensure t
   :hook (prog-mode . ws-butler-mode))
 
-(defun mw/named-eat (name)
-  "Start eat and renames the buffer NAME."
+(defun mw/named-vter (name)
+  "Start vterm and renames the buffer NAME."
   (interactive "sTerminal name:")
-  (eat)
-  (rename-buffer (concat "eat-" name)))
+  (vterm)
+  (rename-buffer (concat "vterm-" name)))
 
 (nvmap :prefix "SPC" :keymaps 'override
     "t"     '(:which-key "terminal")
-    "t f"   '(mw/named-eat :which-key "New Terminal")
-    "t t"   '((lambda () (interactive) (projectile-run-eat)) :which-key "New Terminal")
+    "t f"   '(mw/named-vterm :which-key "New Terminal")
+    "t t"   '((lambda () (interactive) (projectile-run-vterm)) :which-key "New Terminal")
     "t s"   '((lambda () (interactive) (projectile-run-shell)) :which-key "New Shell"))
 
 (delete-selection-mode t)
@@ -521,11 +521,16 @@
 
 
 (setq-default explicit-shell-file-name "/bin/zsh")
-(use-package eat
+(use-package vterm
   :ensure t
-  :commands (eat)
+  :commands (vterm)
   :config
-  (setq shell-file-name "/bin/zsh"))
+  (setq shell-file-name "/bin/zsh"
+        vterm-shell "/bin/zsh"
+        vterm-max-scrollback 9000))
+
+(nvmap :keymaps '(override vterm-map-mode) :prefix "C-c"
+  "C-c"   '(vterm--self-insert :which-key "Literal Ctrl C"))
 
 (winner-mode 1)
 
