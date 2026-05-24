@@ -24,6 +24,16 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
+
+(use-package eglot
+  :ensure t
+  :custom
+  (eglot-connect-timeout 300)
+  (eglot-sync-connect nil)
+  (eglot-events-buffer-config '(:size 2000000 :format full))
+  (eldoc-echo-area-use-multiline-p t)
+  (eldoc-echo-area-prefer-doc-buffer t))
+
 (add-hook 'clojure-mode-hook 'eglot-ensure)
 (add-hook 'fennel-mode-hook 'eglot-ensure)
 
