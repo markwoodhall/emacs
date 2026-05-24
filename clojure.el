@@ -28,6 +28,25 @@
 (use-package clojure-mode
   :ensure t)
 
+(require 'project)
+
+(defun mw/project-try-clojure (dir)
+  "Return the closest ancestor of DIR containing a Clojure project marker."
+  (when-let* ((root (seq-some
+                     (lambda (marker) (locate-dominating-file dir marker))
+                     '("project.clj" "deps.edn" "shadow-cljs.edn" "bb.edn" "build.boot"))))
+    (cons 'transient (expand-file-name root))))
+
+(add-hook 'project-find-functions #'mw/project-try-clojure -90)
+
+;; Stop marginalia annotating cider's "Select ClojureScript REPL type:" prompt
+;; with face/variable docstrings (e.g. `shadow' → "Basic face for shadowed text").
+(with-eval-after-load 'marginalia
+  (add-to-list 'marginalia-prompt-categories
+               '("\\`Select ClojureScript REPL type" . cider-cljs-repl-type))
+  (add-to-list 'marginalia-annotators
+               '(cider-cljs-repl-type none)))
+
 (use-package cider
   :ensure t
   :defer t
