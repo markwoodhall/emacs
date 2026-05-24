@@ -196,10 +196,11 @@
 
 (nvmap :prefix "SPC" :keymaps 'override
    "b"     '(:which-key "buffers")
-   "b x"   '((lambda () (interactive) (kill-this-buffer) (evil-window-delete)) :which-key "Kill buffer")
+   "b x"   '(quit-window :which-key "Quit window")
+   "b X"   '((lambda () (interactive) (kill-current-buffer) (evil-window-delete)) :which-key "Kill buffer")
    "b l"   '(consult-buffer :which-key "List buffers")
    "b n"   '(next-buffer :which-key "Next buffer")
-   "b n"   '(rename-buffer :which-key "Rename buffer")
+   "b r"   '(rename-buffer :which-key "Rename buffer")
    "b g"   '(consult-line :which-key "Search buffer")
    "b p"   '(previous-buffer :which-key "Previous buffer"))
 
@@ -324,7 +325,14 @@
   :bind
   (("C-." . embark-act)
    ("C-;" . embark-dwim)
-   ("C-h B" . embark-bindings)))
+   ("C-h B" . embark-bindings))
+  :config
+  ;; Evil binds C-. to `evil-repeat-pop' in normal/visual/motion, which
+  ;; shadows embark-act. Unbind so the global embark binding shows through.
+  (with-eval-after-load 'evil
+    (define-key evil-normal-state-map (kbd "C-.") nil)
+    (define-key evil-visual-state-map (kbd "C-.") nil)
+    (define-key evil-motion-state-map (kbd "C-.") nil)))
 
 (use-package embark-consult
   :ensure t
@@ -676,8 +684,7 @@
   :ensure t
   :config
   (setq elfeed-feeds
-        '(("https://news.ycombinator.com/rss" tech)
-          ("http://nullprogram.com/feed/" blog emacs)
+        '(("http://nullprogram.com/feed/" blog emacs)
           ("https://planet.emacslife.com/atom.xml" emacs)
           ("https://neovim.io/news.xml" neovim))))
 
@@ -685,5 +692,8 @@
  (expand-file-name
   "chatgpt.el"
   user-emacs-directory))
+
+(use-package markdown-mode
+  :ensure t)
 
 ;;; emacs.el ends here
