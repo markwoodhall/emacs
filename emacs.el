@@ -254,11 +254,11 @@
 
 (set-face-attribute 'default nil
   :font "JetBrains Mono"
-  :height 108
+  :height 110
   :weight 'regular)
 (set-face-attribute 'variable-pitch nil
   :font "JetBrains Mono"
-  :height 108
+  :height 118
   :weight 'regular)
 (set-face-attribute 'font-lock-comment-face nil
   :slant 'italic)
