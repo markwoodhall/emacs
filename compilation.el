@@ -56,6 +56,8 @@ READ-ENV will product a command prefixed with environment variables."
   (let* ((file (expand-file-name file))
          (command (completing-read "Option: " '("up" "down" file)))
          (buffer-name (concat (projectile-project-root) "  docker compose " command))
+         (process-environment (copy-sequence process-environment))
+         (_ (setenv "COMPOSE_MENU" "false"))
          (buffer (make-comint buffer-name "docker" nil "compose" "-f" file command)))
     (mw/comint-pop buffer)))
 
