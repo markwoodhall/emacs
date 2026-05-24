@@ -232,8 +232,7 @@
   "m"   '(:which-key "major")
   "m e" '(:which-key "evaluation")
   "m e b" '(eval-buffer :which-key "Eval buffer")
-  "m e e" '(eval-defun-at-point :which-key "Eval root expressions")
-  "m e E" '(eval-sexp-at-point :which-key "Eval expressions"))
+  "m e e" '(eval-last-sexp :which-key "Eval root expressions"))
 
 (nvmap :states '(normal visual) :keymaps 'override :prefix "SPC"
        "f"     '(:which-key "files")
