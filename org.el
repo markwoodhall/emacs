@@ -40,7 +40,7 @@
   (add-to-list 'org-capture-templates
                '("j" "Journal" entry
                  (file my/daily-file)
-                 "* %?\n")))
+                 "\n* %?\n")))
 
 (use-package org
   :ensure t
