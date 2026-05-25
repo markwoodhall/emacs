@@ -676,4 +676,17 @@
 (use-package markdown-mode
   :ensure t)
 
+(setq ispell-program-name "hunspell")
+(setq ispell-dictionary "en_GB")     ;; or "en_US"
+;; Optional but recommended — tells ispell what's available
+;; so it doesn't probe and so M-x ispell-change-dictionary autocompletes:
+(with-eval-after-load 'ispell
+  (setq ispell-local-dictionary-alist
+        '(("en_GB"
+           "[[:alpha:]]" "[^[:alpha:]]" "[']" nil
+           ("-d" "en_GB") nil utf-8))))
+
+(add-hook 'text-mode-hook #'flyspell-mode)
+(add-hook 'prog-mode-hook #'flyspell-prog-mode)  ; comments + strings only
+
 ;;; emacs.el ends here
