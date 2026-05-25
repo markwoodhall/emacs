@@ -1,17 +1,3 @@
-(setq sql-connection-alist
-      '((local (sql-product 'postgres)
-               (sql-port 5432)
-               (sql-server "localhost"))
-        (local-5431 (sql-product 'postgres)
-                    (sql-port 5431)
-                    (sql-server "localhost"))
-        (local-5432 (sql-product 'postgres)
-                    (sql-port 5432)
-                    (sql-server "localhost"))
-        (local-5433 (sql-product 'postgres)
-                   (sql-port 5433)
-                   (sql-server "localhost"))))
-
 (setq sql-ms-program "sqlcmd")
 (setq sql-ms-options '("-w" "400" "-y" "10" "-Y" "10" "-k"))
 

@@ -198,7 +198,8 @@
    "b l"   '(consult-buffer :which-key "List buffers")
    "b n"   '(next-buffer :which-key "Next buffer")
    "b r"   '(rename-buffer :which-key "Rename buffer")
-   "b g"   '(consult-line :which-key "Search buffer")
+   "b g"   '(consult-line :which-key "Search for line")
+   "b j"   '(consult-goto-line :which-key "Jump to line")
    "b p"   '(previous-buffer :which-key "Previous buffer"))
 
 (nvmap :prefix "SPC" :keymaps 'override
