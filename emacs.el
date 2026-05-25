@@ -158,19 +158,16 @@
   :config
   (global-evil-surround-mode 1))
 
-(use-package undo-tree
+(use-package undo-fu
   :ensure t
-  :after evil
-  :defines
-  undo-tree-history-directory-alist
-  undo-tree-auto-save-history
-  :functions evil-set-undo-system global-undo-tree-mode
-  :diminish
-  :config
-  (evil-set-undo-system 'undo-tree)
-  (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
-  (setq undo-tree-auto-save-history t)
-  (global-undo-tree-mode 1))
+  :config (evil-set-undo-system 'undo-fu))
+
+(use-package undo-fu-session
+  :ensure t
+  :custom (undo-fu-session-directory "~/.emacs.d/undo")
+  :config (undo-fu-session-global-mode))
+
+(use-package vundo :ensure t :defer t)
 
 (global-set-key (kbd "<escape>") 'keyboard-quit)
 
@@ -534,7 +531,7 @@
   :config
   (setq shell-file-name "/bin/zsh"
         vterm-shell "/bin/zsh"
-        vterm-max-scrollback 9000))
+        vterm-max-scrollback 100000))
 
 (nvmap :keymaps '(override vterm-map-mode) :prefix "C-c"
   "C-c"   '(vterm--self-insert :which-key "Literal Ctrl C"))
@@ -677,7 +674,12 @@
   :ensure t
   :config
   (setq claude-code-ide-prevent-reflow-glitch nil)
-  (claude-code-ide-emacs-tools-setup))
+  (claude-code-ide-emacs-tools-setup)
+  (defun mw/claude-code-ide-evil-setup ()
+    (when (string-prefix-p "*claude-code[" (buffer-name))
+      (evil-local-set-key 'normal (kbd "J") #'vterm-send-next)
+      (evil-local-set-key 'normal (kbd "K") #'vterm-send-prior)))
+  (add-hook 'vterm-mode-hook #'mw/claude-code-ide-evil-setup))
 
 (use-package elfeed
   :ensure t
