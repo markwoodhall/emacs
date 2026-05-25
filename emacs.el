@@ -475,31 +475,10 @@
   (global-diff-hl-mode)
   (diff-hl-flydiff-mode))
 
-(use-package org
-  :ensure t
-  :mode ("\\.org\\'" . org-mode))
-
-;;(add-hook 'org-mode-hook 'org-indent-mode)
-
-(use-package org-bullets
-  :ensure t
-  :after org)
-
-(add-hook 'org-mode-hook 'org-bullets-mode)
-
-(require 'ob-clojure)
-(setq org-babel-clojure-backend 'babashka)
-(with-eval-after-load 'org
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((sql . t)
-   (clojure . t)
-   (shell . t))))
-
-(nvmap :keymaps 'org-mode-map :prefix "SPC"
-  "m"   '(:which-key "major")
-  "m e" '(:which-key "evaluation")
-  "m e e" '(org-babel-execute-src-block :which-key "Execute source block"))
+(load-file
+ (expand-file-name
+  "org.el"
+  user-emacs-directory))
 
 (use-package projectile
   :ensure t
@@ -533,7 +512,7 @@
         vterm-shell "/bin/zsh"
         vterm-max-scrollback 100000))
 
-(nvmap :keymaps '(override vterm-map-mode) :prefix "C-c"
+(nvmap :keymaps '(vterm-map-mode) :prefix "C-c"
   "C-c"   '(vterm--self-insert :which-key "Literal Ctrl C"))
 
 (winner-mode 1)
