@@ -33,13 +33,6 @@ READ-ENV will product a command prefixed with environment variables."
      env
      command target opts)))
 
-(defun mw/build-projectile-command (cmd target options change-dir read-env)
-  "Buld a compilation command CMD with TARGET and OPTIONS.
-CHANGE-DIR will produce a command that runs in the project root.
-READ-ENV will product a command prefixed with environment variables."
-  (mw/build-command
-   cmd target options change-dir (projectile-project-root) read-env))
-
 (defun mw/comint-pop (buffer)
   (with-current-buffer buffer
     (compilation-shell-minor-mode 1)
@@ -52,10 +45,10 @@ READ-ENV will product a command prefixed with environment variables."
   "Run docker compose using FILE."
   (interactive
    (list
-    (read-file-name "Compose File: " (projectile-project-root) "docker-compose.yml" t "docker-compose.yml")))
+    (read-file-name "Compose File: " (project-root (project-current t)) "docker-compose.yml" t "docker-compose.yml")))
   (let* ((file (expand-file-name file))
          (command (completing-read "Option: " '("up" "down" file)))
-         (buffer-name (concat (projectile-project-root) "  docker compose " command))
+         (buffer-name (concat (project-root (project-current t)) "  docker compose " command))
          (process-environment (copy-sequence process-environment))
          (_ (setenv "COMPOSE_MENU" "false"))
          (buffer (make-comint buffer-name "docker" nil "compose" "-f" file command)))
@@ -66,7 +59,7 @@ READ-ENV will product a command prefixed with environment variables."
   (interactive
    (list
     (completing-read "Container: " (mw/bash "docker ps --format '{{json .}}' | jq -r .Names"))))
-  (let ((buffer-name (concat (projectile-project-root) "  docker logs " container)))
+  (let ((buffer-name (concat (project-root (project-current t)) "  docker logs " container)))
     (mw/comint-pop (make-comint buffer-name "docker" nil "logs" container "--follow"))))
 
 ;; docker

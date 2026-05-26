@@ -212,17 +212,24 @@
   :ensure t
   :hook (prog-mode . ws-butler-mode))
 
-(defun mw/named-vter (name)
+(defun mw/named-vterm (name)
   "Start vterm and renames the buffer NAME."
   (interactive "sTerminal name:")
   (vterm)
   (rename-buffer (concat "vterm-" name)))
 
+(defun mw/project-vterm ()
+  "Start vterm in the current project's root directory."
+  (interactive)
+  (let* ((default-directory (project-root (project-current t)))
+         (vterm-buffer-name (project-prefixed-buffer-name "vterm")))
+    (vterm)))
+
 (nvmap :prefix "SPC" :keymaps 'override
     "t"     '(:which-key "terminal")
     "t f"   '(mw/named-vterm :which-key "New Terminal")
-    "t t"   '((lambda () (interactive) (projectile-run-vterm)) :which-key "New Terminal")
-    "t s"   '((lambda () (interactive) (projectile-run-shell)) :which-key "New Shell"))
+    "t t"   '(mw/project-vterm :which-key "New Terminal")
+    "t s"   '(project-shell :which-key "New Shell"))
 
 (delete-selection-mode t)
 
@@ -481,28 +488,12 @@
   "org.el"
   user-emacs-directory))
 
-(use-package projectile
-  :ensure t
-  :defines
-  projectile-project-search-path
-  projectile-switch-project-action
-  :functions
-  projectile-mode
-  projectile-dired
-  :config
-  (projectile-mode 1)
-  :init
-  (when (file-directory-p "~/src")
-    (setq projectile-project-search-path '("~/src")))
-  (setq projectile-switch-project-action #'projectile-dired))
-
 (nvmap :keymaps 'override :prefix "SPC"
        "p"     '(:which-key "projects")
-       "p p"   '(projectile-switch-project :which-key "Swtich project")
-       "p l"   '(projectile-switch-to-buffer :which-key "Buffer list")
-       "p r"   '(projectile-recentf :which-key "Recent files")
-       "p f"   '(projectile-find-file :which-key "Find file"))
-
+       "p p"   '(projec-switch-project :which-key "Swtich project")
+       "p l"   '(project-switch-to-buffer :which-key "Buffer list")
+       "p r"   '(recentf :which-key "Recent files")
+       "p f"   '(projec-find-file :which-key "Find file"))
 
 (setq-default explicit-shell-file-name "/bin/zsh")
 (use-package vterm
