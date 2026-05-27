@@ -80,12 +80,6 @@
 ;; fullscreen.
 (setq frame-resize-pixelwise t)
 
-;; Try life without relative line numbers for a week. Re-enable by
-;; restoring the two hooks and switching the type back to 'relative.
-(setq-default display-line-numbers-type t
-              display-line-numbers-width 4
-              display-line-numbers-grow-only t)
-
 (set-default 'truncate-lines t)
 
 (use-package catppuccin-theme
@@ -208,6 +202,7 @@
 
 (setq-default indent-tabs-mode nil)
 
+;; ws-butler an unobtrusive way to trim whitespace
 (use-package ws-butler
   :ensure t
   :hook (prog-mode . ws-butler-mode))
@@ -466,8 +461,6 @@
   "g"   '(:which-key "git")
   "g g" '(consult-git-grep :which-key "Grep git files")
   "g f" '(magit-find-file :which-key "Git files")
-  "g F" '(magit-pull :which-key "Magit pull -rebase")
-  "g P" '(magit-push :which-key "Magit push")
   "g s" '(magit-status :which-key "Magit status"))
 
 (use-package diff-hl
