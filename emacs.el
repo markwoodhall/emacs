@@ -483,10 +483,10 @@
 
 (nvmap :keymaps 'override :prefix "SPC"
        "p"     '(:which-key "projects")
-       "p p"   '(projec-switch-project :which-key "Swtich project")
+       "p p"   '(project-switch-project :which-key "Swtich project")
        "p l"   '(project-switch-to-buffer :which-key "Buffer list")
        "p r"   '(recentf :which-key "Recent files")
-       "p f"   '(projec-find-file :which-key "Find file"))
+       "p f"   '(project-find-file :which-key "Find file"))
 
 (setq-default explicit-shell-file-name "/bin/zsh")
 (use-package vterm
