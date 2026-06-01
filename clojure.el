@@ -30,7 +30,7 @@
 
 (require 'project)
 
-(setq project-vc-extra-root-markers '("deps.edn" "project.clj" "bb.edn"))
+(setq project-vc-extra-root-markers '("deps.edn" "project.clj" "bb.edn" "build.boot" "shadow-cljs.edn"))
 
 ;; Stop marginalia annotating cider's "Select ClojureScript REPL type:" prompt
 ;; with face/variable docstrings (e.g. `shadow' → "Basic face for shadowed text").
