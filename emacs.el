@@ -216,9 +216,8 @@
 (defun mw/project-vterm ()
   "Start vterm in the current project's root directory."
   (interactive)
-  (let* ((default-directory (project-root (project-current t)))
-         (vterm-buffer-name (project-prefixed-buffer-name "vterm")))
-    (vterm)))
+  (let* ((default-directory (project-root (project-current t))))
+    (mw/named-vterm (project-prefixed-buffer-name "vterm"))))
 
 (nvmap :prefix "SPC" :keymaps 'override
     "t"     '(:which-key "terminal")
