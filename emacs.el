@@ -251,12 +251,12 @@
   :commands (sudo-edit sudo-edit-find-file sudo-edit))
 
 (set-face-attribute 'default nil
-  :font "JetBrains Mono"
-  :height 110
+  :font "Iosevka Comfy"
+  :height 126
   :weight 'regular)
 (set-face-attribute 'variable-pitch nil
-  :font "JetBrains Mono"
-  :height 118
+  :font "Iosevka Comfy"
+  :height 130
   :weight 'regular)
 (set-face-attribute 'font-lock-comment-face nil
   :slant 'italic)
