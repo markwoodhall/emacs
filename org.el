@@ -68,3 +68,4 @@
   "m e" '(:which-key "evaluation")
   "m e e" '(org-babel-execute-src-block :which-key "Execute source block"))
 
+(setq browse-url-browser-function #'eww-browse-url)
