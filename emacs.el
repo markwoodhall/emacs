@@ -355,6 +355,11 @@
   :ensure t
   :mode "\\.tf\\'")
 
+(use-package sly
+  :ensure t
+  :mode "\\.lisp\\'"
+  :hook (lisp-mode . sly-mode))
+
 (use-package highlight-indent-guides
   :ensure t
   :diminish t
@@ -387,6 +392,7 @@
   :hook ((clojure-mode . smartparens-strict-mode)
          (cider-repl-mode . smartparens-mode)
          (fennel-mode . smartparens-strict-mode)
+         (lisp-mode . smartparens-strict-mode)
          (emacs-lisp-mode . smartparens-strict-mode)))
 
 (use-package evil-cleverparens
@@ -650,6 +656,7 @@
   (setq elfeed-feeds
         '(("http://nullprogram.com/feed/" blog emacs)
           ("https://planet.emacslife.com/atom.xml" emacs)
+          ("https://www.reddit.com/r/emacs/.rss" emacs)
           ("https://neovim.io/news.xml" neovim))))
 
 (load-file
@@ -659,6 +666,11 @@
 
 (use-package markdown-mode
   :ensure t)
+
+(use-package column-enforce-mode
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook 'column-enforce-mode))
 
 (setq ispell-program-name "hunspell")
 (setq ispell-dictionary "en_GB")     ;; or "en_US"
