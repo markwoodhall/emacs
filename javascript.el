@@ -30,10 +30,4 @@
   :ensure nil
   :defer t
   :mode ("\\.jsx\\'" "\\.js\\'"))
-
-(use-package typescript-ts-mode
-  :ensure nil
-  :defer t
-  :mode "\\.tsx\\'")
-
 ;;; javascript.el ends here

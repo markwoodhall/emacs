@@ -86,7 +86,7 @@
   :ensure t
   :config
   (load-theme 'catppuccin :no-confirm)
-  (setq catppuccin-flavor 'macchiato) ;; or 'latte, 'macchiato, or 'mocha
+  (setq catppuccin-flavor 'mocha) ;; or 'latte, 'macchiato, or 'mocha
   (catppuccin-reload))
 
 ;; This sets $MANPATH, $PATH and exec-path from your shell,
@@ -185,21 +185,6 @@
 
 (setq switch-to-buffer-obey-display-actions t)
 
-(nvmap :prefix "SPC" :keymaps 'override
-   "b"     '(:which-key "buffers")
-   "b x"   '(quit-window :which-key "Quit window")
-   "b X"   '((lambda () (interactive) (kill-current-buffer) (evil-window-delete)) :which-key "Kill buffer")
-   "b l"   '(consult-buffer :which-key "List buffers")
-   "b n"   '(next-buffer :which-key "Next buffer")
-   "b r"   '(rename-buffer :which-key "Rename buffer")
-   "b g"   '(consult-line :which-key "Search for line")
-   "b j"   '(consult-goto-line :which-key "Jump to line")
-   "b p"   '(previous-buffer :which-key "Previous buffer"))
-
-(nvmap :prefix "SPC" :keymaps 'override
-   "c"     '(:which-key "processes")
-   "c l"   '(list-processes :which-key "List processes"))
-
 (setq-default indent-tabs-mode nil)
 
 ;; ws-butler an unobtrusive way to trim whitespace
@@ -219,32 +204,7 @@
   (let* ((default-directory (project-root (project-current t))))
     (mw/named-vterm (project-prefixed-buffer-name "vterm"))))
 
-(nvmap :prefix "SPC" :keymaps 'override
-    "t"     '(:which-key "terminal")
-    "t f"   '(mw/named-vterm :which-key "New Terminal")
-    "t t"   '(mw/project-vterm :which-key "New Terminal")
-    "t s"   '(project-shell :which-key "New Shell"))
-
 (delete-selection-mode t)
-
-(nvmap :keymaps '(emacs-lisp-mode-map) :prefix "SPC"
-  "m"   '(:which-key "major")
-  "m e" '(:which-key "evaluation")
-  "m e b" '(eval-buffer :which-key "Eval buffer")
-  "m e e" '(eval-last-sexp :which-key "Eval root expressions"))
-
-(nvmap :states '(normal visual) :keymaps 'override :prefix "SPC"
-       "f"     '(:which-key "files")
-       "f f"   '(find-file :which-key "Find file")
-       "f g"   '(consult-ripgrep :which-key "Grep files")
-       "f r"   '(consult-recent-file :which-key "Recent files")
-       "f s"   '(save-buffer :which-key "Save file")
-       "f u"   '(sudo-edit-find-file :which-key "Sudo find file")
-       "f C"   '(copy-file :which-key "Copy file")
-       "f D"   '(delete-file :which-key "Delete file")
-       "f R"   '(rename-file :which-key "Rename file")
-       "f S"   '(write-file :which-key "Save file as...")
-       "f U"   '(sudo-edit :which-key "Sudo edit file"))
 
 (use-package sudo-edit
   :ensure t
@@ -252,11 +212,11 @@
 
 (set-face-attribute 'default nil
   :font "Iosevka Comfy"
-  :height 126
+  :height 110
   :weight 'regular)
 (set-face-attribute 'variable-pitch nil
   :font "Iosevka Comfy"
-  :height 130
+  :height 114
   :weight 'regular)
 (set-face-attribute 'font-lock-comment-face nil
   :slant 'italic)
@@ -265,12 +225,6 @@
 
 ;; changes certain keywords to symbols, such as lamda!
 (global-prettify-symbols-mode 1)
-
-(nvmap :keymaps 'override :prefix "SPC"
-       "SPC"   '(execute-extended-command :which-key "All commands (M-x)")
-       "h"     '(:which-key "help")
-       "h r"   '(:which-key "reload")
-       "h r e" '((lambda () (interactive) (load-file "~/.emacs.d/init.el")) :which-key "Reload emacs config"))
 
 (use-package vertico
   :ensure t
@@ -401,43 +355,6 @@
   :init
   (add-hook 'smartparens-enabled-hook #'evil-cleverparens-mode))
 
-(nvmap :keymaps '(smartparens-mode-map smartparens-strict-mode-map) :prefix "SPC"
-  "s"   '(:which-key "smartparens")
-  "s s"   '(:which-key "slurp")
-  "s s b" '(sp-backward-slurp-sexp :which-key "Backward slurp sexp")
-  "s s f" '(sp-forward-slurp-sexp :which-key "Forward slurp sexp")
-
-  "s b"   '(:which-key "barf")
-  "s b b" '(sp-backward-barf-sexp :which-key "Backward barf sexp")
-  "s b f" '(sp-forward-barf-sexp :which-key "Forward barf sexp")
-
-  "s u"   '(:which-key "unwrap")
-  "s u b" '(sp-backward-unwrap-sexp :which-key "Unwrap expression")
-  "s u r" '(sp-raise-sexp :which-key "Raise expression")
-
-  "s w"   '(:which-key "wrap")
-  "s w ("  '(wrap-with-parens :which-key "Wrap with parens")
-  "s w )"  '(wrap-with-parens :which-key "Wrap with parens")
-  "s w ["  '(wrap-with-brackets :which-key "Wrap with brackets")
-  "s w ]"  '(wrap-with-brackets :which-key "Wrap with brackets")
-  "s w {"  '(wrap-with-braces :which-key "Wrap with braces")
-  "s w }"  '(wrap-with-braces :which-key "Wrap with braces")
-  "s w \""  '(wrap-with-double-quotes :which-key "Wrap with double quotes")
-  "s w '"  '(wrap-with-single-quotes :which-key "Wrap with single quotes")
-  "s w _"  '(wrap-with-underscores :which-key "Wrap with underscores")
-  "s w `"  '(wrap-with-back-quotes :which-key "Wrap with backticks"))
-
-(nvmap :keymaps 'fennel-mode-map :prefix "SPC"
-  "m"   '(:which-key "major")
-  "m e" '(:which-key "evaluation")
-
-  "m e b" '(fennel-reload :which-key "Fennel eval buffer")
-  "m e e" '(fennel-eval-toplevel-form :which-key "Fennel eval root expressions")
-  "m e E" '(fennel-eval-last-sexp :which-key "Fennel eval expressions")
-
-  "m s" '(:which-key "sesman")
-  "m s i" '(fennel-repl :which-key "Fennel REPL"))
-
 (use-package company
   :ensure t
   :functions global-company-mode
@@ -462,12 +379,6 @@
   :config
   (setq magit-display-buffer-function #'display-buffer))
 
-(nvmap :prefix "SPC" :keymaps 'override
-  "g"   '(:which-key "git")
-  "g g" '(consult-git-grep :which-key "Grep git files")
-  "g f" '(magit-find-file :which-key "Git files")
-  "g s" '(magit-status :which-key "Magit status"))
-
 (use-package diff-hl
   :ensure t
   :functions
@@ -486,13 +397,6 @@
   "org.el"
   user-emacs-directory))
 
-(nvmap :keymaps 'override :prefix "SPC"
-       "p"     '(:which-key "projects")
-       "p p"   '(project-switch-project :which-key "Swtich project")
-       "p l"   '(project-switch-to-buffer :which-key "Buffer list")
-       "p r"   '(recentf :which-key "Recent files")
-       "p f"   '(project-find-file :which-key "Find file"))
-
 (setq-default explicit-shell-file-name "/bin/zsh")
 (use-package vterm
   :ensure t
@@ -506,55 +410,6 @@
   "C-c"   '(vterm--self-insert :which-key "Literal Ctrl C"))
 
 (winner-mode 1)
-
-(nvmap :keymaps 'override :prefix "SPC"
-       "w"     '(:which-key "windows")
-       "w c"   '(evil-window-delete :which-key "Close window")
-       "w n"   '(evil-window-new :which-key "New window")
-       "w S"   '(evil-window-split :which-key "Horizontal split window")
-       "w s"   '(evil-window-vsplit :which-key "Vertical split window")
-       ;; Window motions
-       "w h"   '(evil-window-left :which-key "Window left")
-       "w j"   '(evil-window-down :which-key "Window down")
-       "w k"   '(evil-window-up :which-key "Window up")
-       "w l"   '(evil-window-right :which-key "Window right")
-       "w w"   '(evil-window-next :which-key "Goto next window"))
-
-(use-package which-key
-  :ensure t
-  :defines
-  which-key-side-window-location
-  which-key-sort-order
-  which-key-sort-uppercase-first
-  which-key-add-column-padding
-  which-key-max-display-columns
-  which-key-min-display-lines
-  which-key-side-window-slot
-  which-key-side-window-max-height
-  which-key-idle-delay
-  which-key-max-description-length
-  which-key-allow-imprecise-window-fit
-  which-key-separator
-  :functions
-  which-key-key-order-alpha
-  which-key-mode
-  which-key-setup-minibuffer
-  :config
-  (setq which-key-side-window-location 'bottom
-        which-key-sort-order #'which-key-key-order-alpha
-        which-key-sort-uppercase-first nil
-        which-key-add-column-padding 1
-        which-key-max-display-columns nil
-        which-key-min-display-lines 6
-        which-key-side-window-slot -10
-        which-key-side-window-max-height 0.25
-        which-key-idle-delay 0.8
-        which-key-max-description-length 25
-        which-key-allow-imprecise-window-fit t
-        which-key-separator " → " )
-  :init
-  (which-key-mode)
-  (which-key-setup-minibuffer))
 
 (use-package nerd-icons-dired
   :ensure t
@@ -588,23 +443,6 @@
 ;; Make gc pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 5 1000 1000))
 
-(setq treesit-language-source-alist
-   '((bash "https://github.com/tree-sitter/tree-sitter-bash")
-     (cmake "https://github.com/uyha/tree-sitter-cmake")
-     (css "https://github.com/tree-sitter/tree-sitter-css")
-     (elisp "https://github.com/Wilfred/tree-sitter-elisp")
-     (go "https://github.com/tree-sitter/tree-sitter-go")
-     (html "https://github.com/tree-sitter/tree-sitter-html")
-     (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
-     (json "https://github.com/tree-sitter/tree-sitter-json")
-     (make "https://github.com/alemuller/tree-sitter-make")
-     (markdown "https://github.com/ikatyang/tree-sitter-markdown")
-     (python "https://github.com/tree-sitter/tree-sitter-python")
-     (toml "https://github.com/tree-sitter/tree-sitter-toml")
-     (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
-     (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
-     (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
-
 (use-package markdown-mode
   :ensure t)
 
@@ -634,21 +472,8 @@
 
 (use-package erc-join
   ;; Join #emacs and #erc whenever I connect to Libera.Chat.
-  :custom (erc-autojoin-channels-alist '((Libera.Chat "#emacs" "#erc" "#emacs-til" "#fennel"))))
-
-;; AI tooling
-(use-package claude-code-ide
-  :vc (:url "https://github.com/manzaltu/claude-code-ide.el" :rev :newest)
-  :bind ("C-c C-'" . claude-code-ide-menu)
-  :ensure t
-  :config
-  (setq claude-code-ide-prevent-reflow-glitch nil)
-  (claude-code-ide-emacs-tools-setup)
-  (defun mw/claude-code-ide-evil-setup ()
-    (when (string-prefix-p "*claude-code[" (buffer-name))
-      (evil-local-set-key 'normal (kbd "J") #'vterm-send-next)
-      (evil-local-set-key 'normal (kbd "K") #'vterm-send-prior)))
-  (add-hook 'vterm-mode-hook #'mw/claude-code-ide-evil-setup))
+  :custom (erc-autojoin-channels-alist
+           '((Libera.Chat "#emacs" "#emacs-til" "#fennel" "#clojure"))))
 
 (use-package elfeed
   :ensure t

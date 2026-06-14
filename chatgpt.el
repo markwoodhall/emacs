@@ -21,9 +21,10 @@
                  " keywords and you will answer. I want you to "
                  " give me an overview of what you found first "
                  " and foremost, and then some references with links "
-                 " I can follow. Don't acknowledge the request, "
+                 " I can follow. Favour links that are easily readable as text."
+                 " Don't acknowledge the request, "
                  " just give me well formatted markdown and no emojis."
-                 "  Here are the keywords:")))
+                 " Here are the keywords:")))
     ;; chatgpt-cli
     (shell-command
      (format
