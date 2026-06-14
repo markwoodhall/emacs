@@ -481,8 +481,7 @@
   (setq elfeed-feeds
         '(("http://nullprogram.com/feed/" blog emacs)
           ("https://planet.emacslife.com/atom.xml" emacs)
-          ("https://www.reddit.com/r/emacs/.rss" emacs)
-          ("https://neovim.io/news.xml" neovim))))
+          ("https://www.reddit.com/r/emacs/.rss" emacs))))
 
 (load-file
  (expand-file-name
@@ -510,4 +509,7 @@
 (add-hook 'text-mode-hook #'flyspell-mode)
 (add-hook 'prog-mode-hook #'flyspell-prog-mode)  ; comments + strings only
 
+(setq-default display-line-numbers-type 'relative)
+(add-hook 'prog-mode-hook (lambda() (display-line-numbers-mode 1)))
+(add-hook 'text-mode-hook (lambda() (display-line-numbers-mode 1)))
 ;;; emacs.el ends here
