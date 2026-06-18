@@ -27,6 +27,7 @@
 (setq vc-follow-symlinks t)
 
 (setq package-native-compile t)
+(setq auth-sources '("~/.authinfo.gpg"))
 
 (require 'package)
 (add-to-list 'package-archives
@@ -98,6 +99,11 @@
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
 
+(load-file
+ (expand-file-name
+  "email.el"
+  user-emacs-directory))
+
 (use-package evil
   :ensure t
   :defines
@@ -117,12 +123,14 @@
 
 (use-package evil-collection
   :ensure t
-  :after evil
+  :after (mu4e evil)
   :defines evil-collection-mode-list
   :functions evil-collection-init
   :config
   (setq evil-collection-mode-list '(dired ibuffer))
-  :custom (evil-collection-setup-minibuffer t)
+  :custom
+  (evil-collection-setup-minibuffer t)
+  (evil-collection-init 'mu4e)
   :init (evil-collection-init))
 
 (use-package evil-goggles
@@ -378,6 +386,10 @@
   :commands (magit-status)
   :config
   (setq magit-display-buffer-function #'display-buffer))
+
+(use-package forge
+  :ensure t
+  :after magit)
 
 (use-package diff-hl
   :ensure t
