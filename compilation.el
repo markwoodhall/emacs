@@ -46,7 +46,8 @@ READ-ENV will product a command prefixed with environment variables."
   (interactive
    (list
     (read-file-name "Compose File: " (project-root (project-current t)) "docker-compose.yml" t "docker-compose.yml")))
-  (let* ((file (expand-file-name file))
+  (let* ((default-directory  (project-root (project-current t)))
+         (file (expand-file-name file))
          (command (completing-read "Option: " '("up" "down" file)))
          (buffer-name (concat (project-root (project-current t)) "  docker compose " command))
          (process-environment (copy-sequence process-environment))

@@ -86,5 +86,9 @@
   ;;    recipient reflow (matches textwidth=0) ────────────────────────
   (add-hook 'mu4e-compose-mode-hook (lambda () (auto-fill-mode -1))))
 
+(use-package org-mime
+  :after org
+  :ensure t)
+
 (provide 'email)
 ;;; email.el ends here

@@ -461,11 +461,6 @@
 (use-package disk-usage
   :ensure t)
 
-(load-file
- (expand-file-name
-  "circleci.el"
-  user-emacs-directory))
-
 ;; ERC
 (use-package erc
   :config
@@ -493,6 +488,7 @@
   (setq elfeed-feeds
         '(("http://nullprogram.com/feed/" blog emacs)
           ("https://planet.emacslife.com/atom.xml" emacs)
+          ("https://rossabaker.com/index.xml" blog emacs)
           ("https://www.reddit.com/r/emacs/.rss" emacs))))
 
 (load-file
@@ -524,4 +520,24 @@
 (setq-default display-line-numbers-type 'relative)
 (add-hook 'prog-mode-hook (lambda() (display-line-numbers-mode 1)))
 (add-hook 'text-mode-hook (lambda() (display-line-numbers-mode 1)))
+
+(use-package mastodon
+  :ensure t
+  :config
+  (setq mastodon-instance-url "https://mastodon.social"
+        mastodon-active-user "markwoodhall"))
+
+(defun mw/start-session ()
+  "Launch comms apps, each in its own named tab."
+  (interactive)
+  (tab-bar-mode 1)
+  (tab-bar-rename-tab "mail")
+  (mu4e)
+  (tab-bar-new-tab)
+  (tab-bar-rename-tab "feeds")
+  (elfeed)
+  (elfeed-update)
+  (tab-bar-new-tab)
+  (tab-bar-rename-tab "irc")
+  (erc-tls :server "irc.libera.chat" :port 6697 :nick "markwoodhall"))
 ;;; emacs.el ends here

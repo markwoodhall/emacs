@@ -42,6 +42,9 @@
                  (file my/daily-file)
                  "\n* %?\n")))
 
+(use-package htmlize
+  :ensure t)
+
 (use-package org
   :ensure t
   :mode ("\\.org\\'" . org-mode))
