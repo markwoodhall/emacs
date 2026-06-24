@@ -124,7 +124,8 @@ entry)."
                   ,@(when port     `((sql-port ,port)))
                   ,@(when database `((sql-database ,database)))
                   ,@(when user     `((sql-user ,user)))))
-         (form `(let ((conn ',entry))
+         (form `(require 'sql)
+                (let ((conn ',entry))
                   (unless (assq ',name sql-connection-alist)
                     (setq-local sql-connection-alist
                                 (cons conn sql-connection-alist))))))

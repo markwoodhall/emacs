@@ -123,14 +123,13 @@
 
 (use-package evil-collection
   :ensure t
-  :after (mu4e evil)
+  :after (evil)
   :defines evil-collection-mode-list
   :functions evil-collection-init
   :config
-  (setq evil-collection-mode-list '(dired ibuffer))
+  (setq evil-collection-mode-list '(dired ibuffer mu4e))
   :custom
   (evil-collection-setup-minibuffer t)
-  (evil-collection-init 'mu4e)
   :init (evil-collection-init))
 
 (use-package evil-goggles
@@ -482,15 +481,6 @@
   :custom (erc-autojoin-channels-alist
            '((Libera.Chat "#emacs" "#emacs-til" "#fennel" "#clojure"))))
 
-(use-package elfeed
-  :ensure t
-  :config
-  (setq elfeed-feeds
-        '(("http://nullprogram.com/feed/" blog emacs)
-          ("https://planet.emacslife.com/atom.xml" emacs)
-          ("https://rossabaker.com/index.xml" blog emacs)
-          ("https://www.reddit.com/r/emacs/.rss" emacs))))
-
 (load-file
  (expand-file-name
   "chatgpt.el"
@@ -526,18 +516,4 @@
   :config
   (setq mastodon-instance-url "https://mastodon.social"
         mastodon-active-user "markwoodhall"))
-
-(defun mw/start-session ()
-  "Launch comms apps, each in its own named tab."
-  (interactive)
-  (tab-bar-mode 1)
-  (tab-bar-rename-tab "mail")
-  (mu4e)
-  (tab-bar-new-tab)
-  (tab-bar-rename-tab "feeds")
-  (elfeed)
-  (elfeed-update)
-  (tab-bar-new-tab)
-  (tab-bar-rename-tab "irc")
-  (erc-tls :server "irc.libera.chat" :port 6697 :nick "markwoodhall"))
 ;;; emacs.el ends here
