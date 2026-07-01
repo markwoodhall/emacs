@@ -30,4 +30,6 @@
   :ensure nil
   :defer t
   :mode ("\\.jsx\\'" "\\.js\\'"))
+
+(add-hook 'js-json-mode-hook (lambda() (visual-line-mode)))
 ;;; javascript.el ends here

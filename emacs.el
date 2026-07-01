@@ -219,11 +219,11 @@
 
 (set-face-attribute 'default nil
   :font "Iosevka Comfy"
-  :height 110
+  :height 165
   :weight 'regular)
 (set-face-attribute 'variable-pitch nil
   :font "Iosevka Comfy"
-  :height 114
+  :height 179
   :weight 'regular)
 (set-face-attribute 'font-lock-comment-face nil
   :slant 'italic)
@@ -492,7 +492,7 @@
 (use-package column-enforce-mode
   :ensure t
   :config
-  (add-hook 'prog-mode-hook 'column-enforce-mode))
+  (add-hook 'clojure-mode-hook 'column-enforce-mode))
 
 (setq ispell-program-name "hunspell")
 (setq ispell-dictionary "en_GB")     ;; or "en_US"
